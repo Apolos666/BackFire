@@ -17,16 +17,18 @@ public class GunPrototype : MonoBehaviour
     [SerializeField] private Transform _Vector2up;
     
     private Rigidbody2D _rb;
+    private Animator _animator;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     } 
 
     private void Update()
     {
         _rb.angularVelocity = Mathf.Clamp(_rb.angularVelocity, -_maxAngularVelocity, _maxAngularVelocity);
-        _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -_maxVelocity, _maxVelocity), _rb.velocity.y);
+        _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -_maxVelocity, _maxVelocity), Mathf.Clamp(_rb.velocity.y, -_maxVelocity, _maxVelocity));
         
         if (Input.touchCount > 0)
         {
@@ -43,6 +45,7 @@ public class GunPrototype : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
+            _animator.Play("Shoot");
             // Khởi tạo đối tượng và truyền hướng cho nó
             var bullet = Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
             bullet.SetVelOnInstantiate(_spawnPoint.right);

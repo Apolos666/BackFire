@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class StateMachine
 {
     private IState _currentState;
+    private IState _previousState;
+    public IState PreviousState => _previousState;
 
     private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
     private List<Transition> _currentTransitions = new List<Transition>();
@@ -24,6 +26,8 @@ public class StateMachine
     {
         if (_currentState == state)
             return;
+
+        _previousState = _currentState;
         
         _currentState?.OnExit();
         _currentState = state;

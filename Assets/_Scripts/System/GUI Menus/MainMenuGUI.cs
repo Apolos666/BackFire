@@ -9,7 +9,7 @@ public class MainMenuGUI : MonoBehaviour, IInitializable
         MainMenuState.OnExitEvent += MainMenuStateOnExitEvent;
     }
     
-    private void OnDisable()
+    private void OnDestroy()
     {
         MainMenuState.OnEnterEvent -= MainMenuStateOnEnterEvent; 
         MainMenuState.OnExitEvent -= MainMenuStateOnExitEvent;

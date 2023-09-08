@@ -152,7 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e93639afa1de64cb6c7ee94ebb06bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainMenu: {fileID: 11400000, guid: cdd00b153d9fcef41b02536e3f1a3000, type: 2}
+  _settingMenu: {fileID: 11400000, guid: b4613d1acf937d44eae8959a5f10d4f0, type: 2}
   _selectionMenu: {fileID: 11400000, guid: 4578d0aaea3620948a47a4f1e47eb693, type: 2}
+  _upgradeMenu: {fileID: 11400000, guid: b49e748d6b56d7b40aa30c0343fee08c, type: 2}
+  _unlockMenu: {fileID: 11400000, guid: e6da5b17dc1c2d84bb24050687a0ac16, type: 2}
+  _mapSelectionMenu: {fileID: 11400000, guid: 1a9aab24d4901d748b7ee1ea1dcc1283, type: 2}
+  _turnBackRequest: {fileID: 11400000, guid: ccfa505f233b11c44bdccf35b36962d2, type: 2}
 --- !u!4 &402304424
 Transform:
   m_ObjectHideFlags: 0

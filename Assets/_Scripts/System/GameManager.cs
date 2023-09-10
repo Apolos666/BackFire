@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
     private PauseMenuState _pauseMenuState;
     private SettingMenuState _settingMenuState;
     private DeathMenuState _deathMenuState;
-    
+
+    [SerializeField] private GameObject _mainCamera;
+
     #endregion
 
     #region Listening on channels
@@ -31,16 +33,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GUIEventChannelSO _upgradeMenu;
     [SerializeField] private GUIEventChannelSO _unlockMenu;
     [SerializeField] private GUIEventChannelSO _mapSelectionMenu;
+    [SerializeField] private GUIEventChannelSO _pauseMenu;
 
     [Header("Listening on void channels")] 
     [SerializeField] private VoidEventChannelSO _turnBackRequest;
+    [SerializeField] private VoidEventChannelSO _startGameRequest;
+    [SerializeField] private VoidEventChannelSO _playerDeathRequest;
+    [SerializeField] private VoidEventChannelSO _gamePlayRequest;
     
     #endregion
     
     #region Scene Transition conditions
 
     private bool _isMainMenu, _isSettingMenu, _isSelectionMenu, _isUpgradeMenu, _isUnlockMenu, _isMapSelectionMenu,
-        _isStartGame, _isPauseMenu, _isDeathMenu = false;
+        _isStartGame, _isPauseMenu, _isDeathMenu, _isGamePlay = false;
     
     public bool IsMainMenu => _isMainMenu;
     public bool IsSettingMenu => _isSelectionMenu;
@@ -51,6 +57,7 @@ public class GameManager : MonoBehaviour
     public bool IsStartGame => _isStartGame;
     public bool IsPauseMenu => _isPauseMenu;
     public bool IsDeathMenu => _isDeathMenu;
+    public bool IsGamePlay => _isGamePlay;
 
     #endregion
     
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour
         _upgradeMenuState = new UpgradeMenuState();
         _unlockMenuState = new UnlockMenuState();
         _mapSelectionState = new MapSelectionState();
-        _startGameState = new StartGameState();
+        _startGameState = new StartGameState(this, _mainCamera);
         _gamePlayState = new GamePlayState();
         _deathState = new DeathState();
         _pauseMenuState = new PauseMenuState();
@@ -110,6 +117,22 @@ public class GameManager : MonoBehaviour
         At(_mapSelectionState, _startGameState, () => _isStartGame);
         At(_mapSelectionState, _settingMenuState, () => _isSettingMenu);
         At(_mapSelectionState, _selectionMenuState, () => _isSelectionMenu);
+        
+        At(_startGameState, _gamePlayState, () => _isGamePlay);
+        
+        At(_gamePlayState, _deathMenuState, () => _isDeathMenu);
+        At(_gamePlayState, _pauseMenuState, () => _isPauseMenu);
+        
+        At(_pauseMenuState, _startGameState, () => _isStartGame);
+        At(_pauseMenuState, _gamePlayState, () => _isGamePlay);
+        At(_pauseMenuState, _mainMenuState, () => _isMainMenu);
+        At(_pauseMenuState, _selectionMenuState, () => _isSelectionMenu);
+        At(_pauseMenuState, _settingMenuState, () => _isSettingMenu);
+
+        At(_deathMenuState, _startGameState, () => _isStartGame);
+        At(_deathMenuState, _gamePlayState, () => _isGamePlay);
+        At(_deathMenuState, _settingMenuState, () => _isSettingMenu);
+        At(_deathMenuState, _mainMenuState, () => _isMainMenu);
 
         #endregion
         
@@ -128,6 +151,7 @@ public class GameManager : MonoBehaviour
             _isUpgradeMenu = false;
             _isUnlockMenu = false;
             _isSettingMenu = false;
+            _isPauseMenu = false;
             _isMainMenu = changedRequest;
         };
 
@@ -179,7 +203,8 @@ public class GameManager : MonoBehaviour
             _isUpgradeMenu = false;
             _isUnlockMenu = false;
             _isMapSelectionMenu = false;
-            _isSettingMenu = false; 
+            _isSettingMenu = false;
+            _isPauseMenu = false;
             _isSelectionMenu = changedRequest; 
         };
         
@@ -207,7 +232,35 @@ public class GameManager : MonoBehaviour
             _isStartGame = false;
             _isMapSelectionMenu = changedRequest;
         };
-        
+
+        _startGameRequest.OnChangedRequest += () =>
+        {
+            _isMapSelectionMenu = false;
+            _isPauseMenu = false;
+            _isStartGame = true;
+        };
+
+        _gamePlayRequest.OnChangedRequest += () =>
+        {
+            SetGamePlayState();
+        };
+
+        _playerDeathRequest.OnChangedRequest += () =>
+        {
+            _isGamePlay = false;
+            _isDeathMenu = true;
+        };
+
+        _pauseMenu.OnGUIChangedRequest += (changedRequest) =>
+        {
+            _isGamePlay = false;
+            _isStartGame = false;
+            _isMainMenu = false;
+            _isSelectionMenu = false;
+            _isSettingMenu = false;
+            _isPauseMenu = changedRequest;
+        };
+
         #endregion
 
     }
@@ -216,5 +269,13 @@ public class GameManager : MonoBehaviour
     {
         _stateMachine.Tick();
         print($"Previous State: {_stateMachine.PreviousState}");
+    }
+
+    public void SetGamePlayState()
+    {
+        _isStartGame = false;
+        _isPauseMenu = false;
+        _isDeathMenu = false;
+        _isGamePlay = true;
     }
 }

@@ -15,6 +15,8 @@ public class GunPrototype : MonoBehaviour
     [SerializeField] private float _maxUpAssist = 30f;
 
     [SerializeField] private Transform _Vector2up;
+
+    [SerializeField] private VoidEventChannelSO _OnPlayerDeath;
     
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -23,7 +25,32 @@ public class GunPrototype : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-    } 
+        _OnPlayerDeath.OnChangedRequest += DisableGunPlay;
+        PauseMenuState.OnEnterEvent += PauseMenuStateOnEnterEvent;
+        PauseMenuState.OnExitEvent += PauseMenuStateOnExitEvent;
+    }
+
+    private void OnDestroy()
+    {
+        _OnPlayerDeath.OnChangedRequest -= DisableGunPlay;
+        PauseMenuState.OnEnterEvent -= PauseMenuStateOnEnterEvent;
+        PauseMenuState.OnExitEvent -= PauseMenuStateOnExitEvent;
+    }
+
+    private void PauseMenuStateOnExitEvent()
+    {
+        Time.timeScale = 1;
+    }
+
+    private void PauseMenuStateOnEnterEvent()
+    {
+        Time.timeScale = 0;
+    }
+
+    private void DisableGunPlay()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void Update()
     {

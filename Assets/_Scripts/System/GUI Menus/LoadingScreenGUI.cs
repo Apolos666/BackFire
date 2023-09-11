@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class LoadingScreenGUI : MonoBehaviour, IInitializable
     [SerializeField] private Image _progressBar;
 
     private Coroutine _currentCoroutine;
+
+    [SerializeField] private GUIEventChannelSO _mainMenuEvent;
 
     public void Initial()
     {
@@ -57,5 +60,15 @@ public class LoadingScreenGUI : MonoBehaviour, IInitializable
         SceneManager.SetActiveScene(currentScene);
 
         gameObject.SetActive(false);
+    }
+
+    public void UnLoadScene(string sceneName)
+    {
+        bool hasGameplayScene = SceneManager.GetActiveScene().name == sceneName;
+
+        if (hasGameplayScene)
+            SceneManager.UnloadSceneAsync(sceneName);
+        else
+            Debug.Log("Currently there is no such scene active");
     }
 }

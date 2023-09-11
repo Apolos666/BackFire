@@ -22,6 +22,8 @@ public class MainMenuGUI : MonoBehaviour, IInitializable
 
     private void MainMenuStateOnEnterEvent()
     {
+        LoadingScreenGUI.Instance.UnLoadScene(Helper.GetSelectedMap(MapSelectionManager.IndexOfCurrentMap));
+        
         gameObject.SetActive(true);
     }
 }

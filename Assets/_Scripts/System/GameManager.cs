@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
 
         _stateMachine = new StateMachine();
 
-        _mainMenuState = new MainMenuState();
-        _selectionMenuState = new SelectionMenuState();
+        _mainMenuState = new MainMenuState(this, _mainCamera);
+        _selectionMenuState = new SelectionMenuState(this, _mainCamera);
         _upgradeMenuState = new UpgradeMenuState();
         _unlockMenuState = new UnlockMenuState();
         _mapSelectionState = new MapSelectionState();
@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
             _isUnlockMenu = false;
             _isSettingMenu = false;
             _isPauseMenu = false;
+            _isDeathMenu = false;
             _isMainMenu = changedRequest;
         };
 
@@ -178,7 +179,7 @@ public class GameManager : MonoBehaviour
                 case PauseMenuState:
                     _isPauseMenu = true;
                     break;
-                case DeathState:
+                case DeathMenuState:
                     _isDeathMenu = true;
                     break;
                 default:

@@ -14,10 +14,14 @@ public class PauseMenuState : IState
     public void OnEnter()
     {
         OnEnterEvent?.Invoke();
+
+        Time.timeScale = 0;
     }
 
     public void OnExit()
     {
         OnExitEvent?.Invoke();
+        
+        Time.timeScale = 1;
     }
 }

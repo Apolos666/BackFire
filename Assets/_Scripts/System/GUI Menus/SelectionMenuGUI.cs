@@ -28,6 +28,8 @@ public class SelectionMenuGUI : MonoBehaviour, IInitializable
 
     private void SelectionMenuStateOnEnterEvent()
     {
+        LoadingScreenGUI.Instance.UnLoadScene(Helper.GetSelectedMap(MapSelectionManager.IndexOfCurrentMap));
+        
         gameObject.SetActive(true);
         _preparationGUI.SetActive(true);
         _selectionMenuButton.interactable = false;

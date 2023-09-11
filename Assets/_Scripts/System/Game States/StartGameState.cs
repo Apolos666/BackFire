@@ -26,19 +26,9 @@ public class StartGameState : IState
     {
         OnEnterEvent?.Invoke();
 
-        switch (MapSelectionManager.IndexOfCurrentMap)
-        {
-            case 0:
-                _sceneName = "Endless Scene";
-                break;
-            case 1:
-                _sceneName = "Untitled Scene";
-                break;
-            default:
-                _sceneName = "";
-                Debug.LogError("Khong co scene thoa man");
-                break;
-        }
+        _sceneName = Helper.GetSelectedMap(MapSelectionManager.IndexOfCurrentMap);
+        
+        LoadingScreenGUI.Instance.UnLoadScene(_sceneName);
         
         LoadingScreenGUI.Instance.StartLoadScene(_sceneName);
 

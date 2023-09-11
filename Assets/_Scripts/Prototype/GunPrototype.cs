@@ -25,16 +25,17 @@ public class GunPrototype : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _OnPlayerDeath.OnChangedRequest += DisableGunPlay;
-        PauseMenuState.OnEnterEvent += PauseMenuStateOnEnterEvent;
-        PauseMenuState.OnExitEvent += PauseMenuStateOnExitEvent;
+        // _OnPlayerDeath.OnChangedRequest += DisableGunPlay;
+        // PauseMenuState.OnEnterEvent += PauseMenuStateOnEnterEvent;
+        // PauseMenuState.OnExitEvent += PauseMenuStateOnExitEvent;
+        
     }
 
     private void OnDestroy()
     {
         _OnPlayerDeath.OnChangedRequest -= DisableGunPlay;
-        PauseMenuState.OnEnterEvent -= PauseMenuStateOnEnterEvent;
-        PauseMenuState.OnExitEvent -= PauseMenuStateOnExitEvent;
+        // PauseMenuState.OnEnterEvent -= PauseMenuStateOnEnterEvent;
+        // PauseMenuState.OnExitEvent -= PauseMenuStateOnExitEvent;
     }
 
     private void PauseMenuStateOnExitEvent()

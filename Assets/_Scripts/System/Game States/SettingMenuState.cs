@@ -14,10 +14,14 @@ public class SettingMenuState : IState
     public void OnEnter()
     {
         OnEnterEvent?.Invoke();
+
+        Time.timeScale = 0f;
     }
 
     public void OnExit()
     {
         OnExitEvent?.Invoke();
+        
+        Time.timeScale = 1f;
     }
 }

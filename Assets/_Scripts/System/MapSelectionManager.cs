@@ -40,7 +40,6 @@ public class MapSelectionManager : MonoBehaviour
 
     private void OnNextMap_ButtonClick()
     {
-        print("Call On Next Map");
         _prevIndexOfCurrentMap = _indexOfCurrentMap;
         _indexOfCurrentMap++;
         ShowMap();

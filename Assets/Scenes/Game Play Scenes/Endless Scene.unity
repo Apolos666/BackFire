@@ -851,10 +851,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1147315160}
   - component: {fileID: 1147315159}
-  - component: {fileID: 1147315158}
   - component: {fileID: 1147315157}
-  - component: {fileID: 1147315156}
   - component: {fileID: 1147315155}
+  - component: {fileID: 1147315161}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -886,27 +885,6 @@ MonoBehaviour:
   _maxUpAssist: 30
   _Vector2up: {fileID: 1160199401}
   _OnPlayerDeath: {fileID: 11400000, guid: 9702103661eae1f4e95b36eaa03ce06b, type: 2}
---- !u!95 &1147315156
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147315154}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae78e5e8e3d41d449aac235e682b849a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1147315157
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -959,37 +937,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1147315158
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147315154}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.75, y: 1.125}
-    newSize: {x: 0.875, y: 0.5625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.75, y: 0.5625}
-      - {x: -0.875, y: 0.5}
-      - {x: -0.875, y: -0.5625}
-      - {x: -0.1875, y: -0.5625}
-      - {x: 0.875, y: 0.0625}
-      - {x: 0.875, y: 0.5625}
 --- !u!50 &1147315159
 Rigidbody2D:
   serializedVersion: 4
@@ -1027,6 +974,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1147315161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147315154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0a2001361837c4684ce7a3367ec272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1160199400
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,12 +19,10 @@ public class GunPrototype : MonoBehaviour
     [SerializeField] private VoidEventChannelSO _OnPlayerDeath;
     
     private Rigidbody2D _rb;
-    private Animator _animator;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
         // _OnPlayerDeath.OnChangedRequest += DisableGunPlay;
         // PauseMenuState.OnEnterEvent += PauseMenuStateOnEnterEvent;
         // PauseMenuState.OnExitEvent += PauseMenuStateOnExitEvent;
@@ -73,7 +71,6 @@ public class GunPrototype : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            _animator.Play("Shoot");
             // Khởi tạo đối tượng và truyền hướng cho nó
             var bullet = Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
             bullet.SetVelOnInstantiate(_spawnPoint.right);

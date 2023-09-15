@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     private MapSelectionState _mapSelectionState;
     private StartGameState _startGameState;
     private GamePlayState _gamePlayState;
-    private DeathState _deathState;
     private PauseMenuState _pauseMenuState;
     private SettingMenuState _settingMenuState;
     private DeathMenuState _deathMenuState;
@@ -75,7 +74,6 @@ public class GameManager : MonoBehaviour
         _mapSelectionState = new MapSelectionState();
         _startGameState = new StartGameState(this, _mainCamera);
         _gamePlayState = new GamePlayState();
-        _deathState = new DeathState();
         _pauseMenuState = new PauseMenuState();
         _settingMenuState = new SettingMenuState();
         _deathMenuState = new DeathMenuState();

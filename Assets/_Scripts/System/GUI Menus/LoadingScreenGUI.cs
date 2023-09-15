@@ -15,8 +15,6 @@ public class LoadingScreenGUI : MonoBehaviour, IInitializable
 
     private Coroutine _currentCoroutine;
 
-    [SerializeField] private GUIEventChannelSO _mainMenuEvent;
-
     public void Initial()
     {
         gameObject.SetActive(false);
@@ -69,6 +67,6 @@ public class LoadingScreenGUI : MonoBehaviour, IInitializable
         if (hasGameplayScene)
             SceneManager.UnloadSceneAsync(sceneName);
         else
-            Debug.Log("Currently there is no such scene active");
+            Debug.Log("Currently there is no such scene gameplay active");
     }
 }
